@@ -4,17 +4,18 @@ import { useRef } from "react";
 
 const Experience = () => {
   const cubeRef = useRef();
-  useFrame(() => {
-    cubeRef.current.rotation.y += 0.003;
+  useFrame((state, delta) => {
+    cubeRef.current.rotation.y += delta;
+    cubeRef.current.rotation.x += delta;
   });
 
   return (
     <>
-      <mesh position-x={-1}>
-        <sphereGeometry />
+      <mesh ref={cubeRef} position-x={-1} scale={1.4}>
+        <boxGeometry />
         <meshBasicMaterial color="orange" />
       </mesh>
-      <mesh ref={cubeRef} position={[1, 0, 0]}>
+      <mesh position={[1, 0, 0]}>
         <sphereGeometry />
         <meshBasicMaterial color="purple" wireframe />
       </mesh>
